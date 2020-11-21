@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import springbook.user.domain.User;
 
-public class UserDaoTest2 {
+public class OldUserDaoTest2 {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 
