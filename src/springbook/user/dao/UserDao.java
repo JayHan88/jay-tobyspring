@@ -4,19 +4,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springbook.user.domain.User;
 
 public class UserDao {
 
 	private ConnectionMaker connectionMaker;
 
+	/*public UserDao() {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+		this.connectionMaker = context.getBean("connectionMaker", ConnectionMaker.class);
+	}*/
+
+	/*public UserDao() {
+		DaoFactory daoFactory = new DaoFactory();
+		this.connectionMaker = daoFactory.connectionMaker();
+	}*/
+
 	public UserDao(ConnectionMaker connectionMaker) {
 		this.connectionMaker = connectionMaker;
-		// connectionMaker = new connectionMaker();
-		// simpleConnectionMaker = new SimpleConnectionMaker();
 	}
-
-	// public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
@@ -62,26 +69,6 @@ public class UserDao {
 
 		return user;
 	}
-
-	// 테스트용 main() method
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-
-		UserDao dao = new DaoFactory().userDao();
-
-		User user = new User();
-		user.setId("kairap");
-		user.setName("Jay");
-		user.setPassword("1234");
-
-		dao.add(user);
-		System.out.println(user.getName() + " add complete");
-
-		User user2 = dao.get(user.getId());
-		System.out.println(user2.getName());
-		System.out.println(user2.getPassword());
-		System.out.println(user2.getId() + " read complete");
-	}
-
 }
 
 
