@@ -4,20 +4,31 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
+import org.junit.Test;
 
-public class UserDaoTest {
+@RunWith(SpringJUnit4ClassRunner.class) // spring의 test context framework의 JUnit 확장기능 지정
+@ContextConfiguration(locations = "/springbook/user/dao/applicationContext.xml") // test context가 자동으로 만들어줄 application context 위치 지정
+// 스프링 테스트 컨텍스트 프레임워크 적용
+public class UserDaoTest2 {
 
-	private UserDao dao;
+	@Autowired
+	private ApplicationContext context;
+
+	//fixture
+	@Autowired
+	UserDao dao;
+
 	private User user1;
 	private User user2;
 	private User user3;
@@ -25,9 +36,7 @@ public class UserDaoTest {
 	@Before
 	public void setUp() {
 
-		ApplicationContext context = new GenericXmlApplicationContext("springbook/user/dao/applicationContext.xml");
-
-		this.dao = context.getBean("userDao", UserDao.class);
+		// this.dao = context.getBean("userDao", UserDao.class);
 		this.user1 = new User("first", "Jay", "1234");
 		this.user2 = new User("second", "Jmaes", "asdf");
 		this.user3 = new User("third", "Tom", "qweq");

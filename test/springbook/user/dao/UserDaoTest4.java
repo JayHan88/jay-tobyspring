@@ -4,18 +4,20 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
-public class UserDaoTest {
+// 컨테이너 없는 DI 테스트 코드
+public class UserDaoTest4 {
 
 	private UserDao dao;
 	private User user1;
@@ -25,9 +27,10 @@ public class UserDaoTest {
 	@Before
 	public void setUp() {
 
-		ApplicationContext context = new GenericXmlApplicationContext("springbook/user/dao/applicationContext.xml");
+		dao = new UserDao();
+		DataSource dataSource = new SingleConnectionDataSource("jdbc:mysql://localhost/jay?allowPublicKeyRetrieval=true&amp;useSSL=false", "han5517", "1234", true);
+		dao.setDataSource(dataSource);
 
-		this.dao = context.getBean("userDao", UserDao.class);
 		this.user1 = new User("first", "Jay", "1234");
 		this.user2 = new User("second", "Jmaes", "asdf");
 		this.user3 = new User("third", "Tom", "qweq");
