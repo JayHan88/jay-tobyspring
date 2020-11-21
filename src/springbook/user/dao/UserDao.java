@@ -15,18 +15,9 @@ public class UserDao {
 		this.connectionMaker = connectionMaker;
 	}
 
-	/*public UserDao(ConnectionMaker connectionMaker) {
-		this.connectionMaker = connectionMaker;
-	}*/
-
 	public void add(User user) throws ClassNotFoundException, SQLException {
 
 		Connection c = connectionMaker.makeConnection();
-		// Connection c = simpleConnectionMaker.makeNewConnection();
-		// Connection c = getConnection();
-		// getConnection() 메소드를 추출해서 중복 제거
-		// Class.forName("com.mysql.jdbc.Driver");
-		// Connection c = DriverManager.getConnection("jdbc:mysql://localhost/jay?allowPublicKeyRetrieval=true&useSSL=false", "han5517", "1234");
 
 		PreparedStatement ps = c.prepareStatement("insert into users (id, name, password) values (?, ?, ?)");
 		ps.setString(1, user.getId());
@@ -41,11 +32,6 @@ public class UserDao {
 	public User get(String id) throws ClassNotFoundException, SQLException {
 
 		Connection c = connectionMaker.makeConnection();
-		// Connection c = simpleConnectionMaker.makeNewConnection();
-		// Connection c = getConnection();
-		// getConnection() 메소드를 추출해서 중복 제거
-		// Class.forName("com.mysql.jdbc.Driver");
-		// Connection c = DriverManager.getConnection("jdbc:mysql://localhost/jay?allowPublicKeyRetrieval=true&useSSL=false", "han5517", "1234");
 
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		ps.setString(1, id);
