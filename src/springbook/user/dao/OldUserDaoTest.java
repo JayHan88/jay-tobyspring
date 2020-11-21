@@ -2,8 +2,6 @@ package springbook.user.dao;
 
 import java.sql.SQLException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import springbook.user.domain.User;
 
@@ -15,7 +13,7 @@ public class OldUserDaoTest {
 		// ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml", UserDao.class);
 		// AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CountingDaoFactory.class);
 
-		UserDao dao = context.getBean("userDao", UserDao.class);
+		UserDao2 dao = context.getBean("userDao", UserDao2.class);
 		CountingConnectionMaker ccm = context.getBean("connectionMaker", CountingConnectionMaker.class);
 
 		User user = new User();

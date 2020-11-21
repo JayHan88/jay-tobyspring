@@ -4,20 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.sql.DataSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import springbook.user.domain.User;
 
 public class UserDao2 {
 
-	private DataSource dataSource;
+	private ConnectionMaker connectionMaker;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setConnectionMaker(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
 	}
 
-	public void add(User user) throws SQLException {
+	public void add(User user) throws ClassNotFoundException, SQLException {
 
-		Connection c = dataSource.getConnection();
+		Connection c = connectionMaker.makeConnection();
 
 		PreparedStatement ps = c.prepareStatement("insert into users (id, name, password) values (?, ?, ?)");
 		ps.setString(1, user.getId());
@@ -29,9 +29,9 @@ public class UserDao2 {
 		c.close();
 	}
 
-	public User get(String id) throws SQLException {
+	public User get(String id) throws ClassNotFoundException, SQLException {
 
-		Connection c = dataSource.getConnection();
+		Connection c = connectionMaker.makeConnection();
 
 		PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
 		ps.setString(1, id);
@@ -50,6 +50,5 @@ public class UserDao2 {
 		return user;
 	}
 }
-
 
 

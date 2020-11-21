@@ -9,8 +9,8 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 public class CountingDaoFactory2 {
 
 	@Bean
-	public UserDao2 userDao2() {
-		UserDao2 userDao = new UserDao2();
+	public UserDao userDao2() {
+		UserDao userDao = new UserDao();
 		userDao.setDataSource(dataSource());
 		return userDao2();
 	}

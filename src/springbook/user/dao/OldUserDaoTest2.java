@@ -13,7 +13,7 @@ public class OldUserDaoTest2 {
 		// ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml", UserDao.class);
 		// AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CountingDaoFactory.class);
 
-		UserDao2 dao = context.getBean("userDao2", UserDao2.class);
+		UserDao dao = context.getBean("userDao2", UserDao.class);
 
 		User user = new User();
 		user.setId("kairap");

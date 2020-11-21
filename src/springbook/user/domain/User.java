@@ -7,6 +7,14 @@ public class User {
 	String name;
 	String password;
 
+	public User() {}
+
+	public User(String id, String name, String password) {
+		this.id = id;
+		this.name = name;
+		this.password = password;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -19,9 +27,7 @@ public class User {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public String getName() { return name; }
 
 	public void setPassword(String password) {
 		this.password = password;

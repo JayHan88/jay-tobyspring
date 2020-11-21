@@ -3,15 +3,14 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-    <property name="driverClass" value="com.mysql.jdbc.Driver" />
-    <property name="url" value="jdbc:mysql://localhost/jay?useSSL=false" />
-    <property name="username" value="han5517" />
-    <property name="password" value="1234" />
+  <bean id="realConnectionMaker" class="springbook.user.dao.LocalDBConnectionMaker" />
+
+  <bean id="connectionMaker" class="springbook.user.dao.CountingConnectionMaker">
+    <constructor-arg ref="realConnectionMaker" />
   </bean>
 
   <bean id="userDao2" class="springbook.user.dao.UserDao2">
-    <property name="dataSource" ref="dataSource" />
+    <property name="connectionMaker" ref="connectionMaker" />
   </bean>
 
 </beans>
