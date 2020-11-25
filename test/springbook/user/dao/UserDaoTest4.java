@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import springbook.user.domain.User;
 
 // 컨테이너 없는 DI 테스트 코드
+
 public class UserDaoTest4 {
 
 	private UserDao dao;
